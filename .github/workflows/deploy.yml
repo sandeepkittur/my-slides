@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Configure npm for private GitHub packages
+        run: git config --global url."https://${{ secrets.THEME_TOKEN }}@github.com/".insteadOf "https://github.com/"
       - run: npm install
       - run: npx slidev build --base /my-slides/
       - uses: peaceiris/actions-gh-pages@v3
