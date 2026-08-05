@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/sandeepkittur/my-slides#readme",
   "dependencies": {
-    "@slidev/cli": "^52.19.0",
-    "slidev-theme-dynatrace": "github:Dynatrace-Internal/slidev-theme-dynatrace"
+    "@slidev/cli": "^52.19.0"
   }
 }

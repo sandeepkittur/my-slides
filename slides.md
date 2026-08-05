@@ -1,6 +1,6 @@
 ---
-theme: dynatrace
-title: My Presentation
+theme: ./theme
+title: 
 ---
 
 # Slide Title
