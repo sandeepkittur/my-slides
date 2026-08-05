@@ -1,0 +1,24 @@
+# Your Name — Week of YYYY-MM-DD
+
+<!-- 
+  HOW TO USE THIS FILE:
+  - Replace "Your Name" and the date above
+  - Add your slides below
+  - Each slide is separated by ---
+  - Keep it to 1-3 slides max per contributor
+  - Save and run: ./update-slides.sh contributor
+-->
+
+---
+
+# Slide Title
+
+- Key point one
+- Key point two
+- Key point three
+
+---
+
+# Optional Second Slide
+
+Add more content here, or delete this slide if not needed.
