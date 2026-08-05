@@ -1,0 +1,22 @@
+{
+  "name": "slidev-theme-dynatrace",
+  "version": "0.1.0",
+  "description": "Dynatrace Corporate 2026 theme for Slidev",
+  "keywords": [
+    "slidev-theme"
+  ],
+  "author": "Indermohan Singh <indermohan.singh@dynatrace.com> (https://dynatrace.enterprise.slack.com/team/U02P6MZ7W07)",
+  "scripts": {
+    "dev": "slidev slides.md"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.15.2"
+  },
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "highlighter": "shiki"
+  }
+}

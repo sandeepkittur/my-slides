@@ -1,0 +1,28 @@
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: "Breaking Changes"
+      labels:
+        - breaking
+    - title: "New Features"
+      labels:
+        - enhancement
+        - feature
+    - title: "Bug Fixes"
+      labels:
+        - bug
+        - fix
+    - title: "Styling & Brand"
+      labels:
+        - styling
+        - design
+    - title: "Documentation"
+      labels:
+        - documentation
+    - title: "Maintenance"
+      labels:
+        - chore
+        - dependencies
+        - refactor

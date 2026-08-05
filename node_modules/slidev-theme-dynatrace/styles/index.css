@@ -1,0 +1,793 @@
+/* DTFlow Font Faces */
+@font-face {
+  font-family: 'DTFlow';
+  src: url('../fonts/DTFlow-Hairline.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DTFlow';
+  src: url('../fonts/DTFlow-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DTFlow';
+  src: url('../fonts/DTFlow-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DTFlow';
+  src: url('../fonts/DTFlow-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DTFlow';
+  src: url('../fonts/DTFlow-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ── Brand Color Tokens (Dynatrace Corporate 2026) ───────────────────────── */
+:root {
+  --dt-navy:    #00092F;   /* dark1 — darkest navy, dark slide backgrounds */
+  --dt-navy2:   #002266;   /* dark2 — secondary dark blue */
+  --dt-white:   #FFFFFF;
+  --dt-gray:    #D8D9D8;   /* light2 — subtle borders, muted text */
+  --dt-accent1: #1866FE;   /* blue — primary brand, bullets, links */
+  --dt-accent2: #7F1AFE;   /* purple/violet */
+  --dt-accent3: #01D393;   /* teal/green — success, positive */
+  --dt-accent4: #85ADFF;   /* light blue */
+  --dt-accent5: #C499FE;   /* light purple */
+  --dt-accent6: #5CFDCC;   /* cyan */
+  --dt-muted:   #6F747F;   /* muted grey — secondary text, confidential label */
+  --dt-off-white: #F2F2F2; /* off-white — section card gradient end */
+  --dt-warning: #FDC300;
+  --dt-error:   #F43D5A;
+  --dt-link:    #1596FE;
+  --dt-gradient: linear-gradient(90deg, #01D393, #1866FE, #7F1AFE);
+
+  /* Typography scale — calibrated to PPT template (10"×7.5" → 980px canvas) */
+  --dt-font-cover-title:   3.75em;  /* PPT 60pt */
+  --dt-font-section-title: 2.5em;   /* PPT 32pt */
+  --dt-font-slide-title:   2.2em;   /* PPT 28pt */
+  --dt-font-body:          1.25em;  /* PPT 20pt */
+  --dt-font-body-sm:       1.1em;   /* PPT 18pt */
+  --dt-font-small:         0.85em;
+
+  /* Spacing */
+  --dt-bar-height:         4px;
+  --dt-spacing-h:          48px;
+  --dt-spacing-v:          32px;
+}
+
+/* ── Light theme (default) ──────────────────────────────────────────────── */
+.slidev-layout {
+  font-family: 'DTFlow', sans-serif;
+  font-weight: 300;
+  background-color: var(--dt-white) !important;
+  color: var(--dt-navy);
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Section and cover layouts manage their own dark backgrounds */
+.slidev-layout.section,
+.slidev-layout.cover,
+.slidev-layout.closing,
+.slidev-layout.animated-background {
+  background-color: var(--dt-navy) !important;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-family: 'DTFlow', sans-serif;
+  font-weight: 700;
+  color: var(--dt-navy);
+  line-height: 1.2;
+}
+
+.slidev-layout h1 {
+  font-size: var(--dt-font-slide-title);
+}
+
+.slidev-layout h2 {
+  font-size: var(--dt-font-body);
+}
+
+.slidev-layout h3 {
+  font-size: 1.2em;
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  font-weight: 300;
+  line-height: 1.6;
+  font-size: var(--dt-font-body);
+}
+
+.slidev-layout li li {
+  font-size: 0.88em;
+}
+
+/* ── Dark theme ─────────────────────────────────────────────────────────── */
+.dark .slidev-layout {
+  background-color: var(--dt-navy);
+  color: var(--dt-white);
+}
+
+.dark .slidev-layout h1,
+.dark .slidev-layout h2,
+.dark .slidev-layout h3 {
+  color: var(--dt-white);
+}
+
+/* ── Roboto Mono — local font for code blocks ────────────────────────────── */
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../fonts/RobotoMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../fonts/RobotoMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Code blocks — Dynatrace CodeSnippet style ───────────────────────────── */
+/* Drive everything via Slidev's own CSS variables — markdown-native approach */
+:root {
+  --slidev-code-font-family: 'Roboto Mono', monospace;
+  --slidev-code-font-size:   0.92em;
+  --slidev-code-line-height: 1.6;
+  --slidev-code-radius:      6px;
+  --slidev-code-background:  #ffffff;
+  --slidev-code-padding:     1em 1.2em;
+  --slidev-code-margin:      0.75em 0;
+}
+
+/* Dark mode code variables */
+html.dark {
+  --slidev-code-background: #1a1a2e;
+}
+
+/* Outer shell: subtle uniform border, no gradient accent */
+.slidev-layout .slidev-code-wrapper {
+  border: 1px solid #dadbe4;
+  border-radius: 6px;
+  overflow-y: auto;
+  max-height: 70%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+html.dark .slidev-layout .slidev-code-wrapper {
+  border-color: #3b3b52;
+}
+
+/* Line numbers: gray left column via gradient on the code element.
+   Slidev renders line numbers as ::before on each .line (CSS counter).
+   The number area is w-4 (16px) + mr-6 (24px) = 40px from left edge. */
+.slidev-code-line-numbers .slidev-code {
+  background-color: #ffffff !important;
+  background-image: linear-gradient(
+    to right,
+    #f0f0f4 0px, #f0f0f4 40px,
+    #ffffff 40px
+  ) !important;
+}
+
+html.dark .slidev-code-line-numbers .slidev-code {
+  background-image: linear-gradient(
+    to right,
+    #12121f 0px, #12121f 40px,
+    #1a1a2e 40px
+  ) !important;
+}
+
+/* Line number text color */
+.slidev-code-line-numbers .slidev-code code .line::before {
+  color: #9898b2 !important;
+}
+
+html.dark .slidev-code-line-numbers .slidev-code code .line::before {
+  color: #5a5a7a !important;
+}
+
+/* Hide line numbers for non-programming languages (bash, shell, text, etc.) */
+.slidev-code-line-numbers .slidev-code code.language-bash .line::before,
+.slidev-code-line-numbers .slidev-code code.language-sh .line::before,
+.slidev-code-line-numbers .slidev-code code.language-shell .line::before,
+.slidev-code-line-numbers .slidev-code code.language-zsh .line::before,
+.slidev-code-line-numbers .slidev-code code.language-text .line::before,
+.slidev-code-line-numbers .slidev-code code.language-txt .line::before,
+.slidev-code-line-numbers .slidev-code code.language-console .line::before,
+.slidev-code-line-numbers .slidev-code code.language-terminal .line::before,
+.slidev-code-line-numbers .slidev-code code.language-md .line::before,
+.slidev-code-line-numbers .slidev-code code.language-markdown .line::before {
+  display: none !important;
+  width: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Remove the gray gutter for those languages too */
+.slidev-code-line-numbers .slidev-code:has(code.language-bash),
+.slidev-code-line-numbers .slidev-code:has(code.language-sh),
+.slidev-code-line-numbers .slidev-code:has(code.language-shell),
+.slidev-code-line-numbers .slidev-code:has(code.language-zsh),
+.slidev-code-line-numbers .slidev-code:has(code.language-text),
+.slidev-code-line-numbers .slidev-code:has(code.language-txt),
+.slidev-code-line-numbers .slidev-code:has(code.language-console),
+.slidev-code-line-numbers .slidev-code:has(code.language-terminal),
+.slidev-code-line-numbers .slidev-code:has(code.language-md),
+.slidev-code-line-numbers .slidev-code:has(code.language-markdown) {
+  background-image: none !important;
+}
+
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-bash),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-sh),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-shell),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-zsh),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-text),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-txt),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-console),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-terminal),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-md),
+html.dark .slidev-code-line-numbers .slidev-code:has(code.language-markdown) {
+  background-image: none !important;
+}
+
+html.dark .slidev-layout .slidev-code .slidev-code-highlighted {
+  background: rgba(39, 84, 181, 0.18) !important;
+}
+
+/* Inline code */
+.slidev-layout :not(pre) > code {
+  background: rgba(39, 84, 181, 0.07) !important;
+  color: #2754b5;
+  border: none;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+}
+
+html.dark .slidev-layout :not(pre) > code {
+  background: rgba(107, 138, 237, 0.15) !important;
+  color: #abb1ed;
+}
+
+/* ── Gradient accent bar utility ────────────────────────────────────────── */
+.dt-gradient-bar {
+  height: 4px;
+  width: 100%;
+  background: var(--dt-gradient);
+  border-radius: 2px;
+}
+
+/* ── Heading accent (left border) ───────────────────────────────────────── */
+.slidev-layout.default h1 {
+  border-left: 4px solid var(--dt-accent1);
+  padding-left: 0.5em;
+  color: var(--dt-navy);
+}
+
+.dark .slidev-layout.default h1 {
+  color: var(--dt-white);
+}
+
+/* ── Links ──────────────────────────────────────────────────────────────── */
+.slidev-layout a {
+  color: var(--dt-link);
+  text-decoration: none;
+}
+
+.slidev-layout a:hover {
+  text-decoration: underline;
+}
+
+/* ── Lists ──────────────────────────────────────────────────────────────── */
+.slidev-layout ul {
+  list-style: none;
+  padding-left: 1.4em;
+}
+
+.slidev-layout ul li {
+  position: relative;
+}
+
+.slidev-layout ul li::before {
+  content: '';
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 50%;
+  background: var(--dt-accent1);
+  vertical-align: middle;
+  margin-right: 0.6em;
+  margin-left: -1.05em;
+  flex-shrink: 0;
+}
+
+/* Task list items — suppress custom bullet */
+.slidev-layout ul li:has(> input[type="checkbox"])::before {
+  display: none;
+}
+
+/* Ordered lists — stepper-style numbered circles */
+.slidev-layout ol {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: dt-ol;
+}
+
+.slidev-layout ol li {
+  counter-increment: dt-ol;
+  font-size: var(--dt-font-body);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.slidev-layout ol li + li {
+  margin-top: 0.6em;
+}
+
+.slidev-layout ol li::before {
+  content: counter(dt-ol);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.9em;
+  height: 1.9em;
+  border-radius: 50%;
+  background: var(--dt-accent1);
+  color: var(--dt-white);
+  font-family: 'DTFlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.78em;
+  line-height: 1;
+}
+
+/* No-bullet list: wrap in <div class="no-bullets"> or add class to the slide */
+.no-bullets ul,
+ul.no-bullets {
+  list-style: none;
+  padding-left: 0;
+}
+
+.no-bullets ul li::before,
+ul.no-bullets li::before {
+  display: none;
+}
+
+/* Indent levels */
+.slidev-layout ul li {
+  padding-left: 0;    /* L1 ~14.5pt via parent padding */
+}
+
+.slidev-layout ul ul {
+  padding-left: 1.7em; /* L2 ~31.5pt */
+}
+
+.slidev-layout ul ul ul {
+  padding-left: 2.4em; /* L3 ~45pt */
+}
+
+/* ── Tables (PPT-styled) ────────────────────────────────────────────────── */
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'DTFlow', sans-serif;
+  font-size: 0.9em;
+  background: transparent;
+}
+
+.slidev-layout thead tr th {
+  background: transparent;
+  color: var(--dt-navy);
+  font-weight: 500;
+  font-size: 0.78em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0.7em 0.9em;
+  border: none;
+  border-bottom: 3px solid var(--dt-accent3);
+}
+
+/* Per-column accent border, cycles through the DT palette (matches PPT) */
+.slidev-layout thead tr th:nth-child(5n + 1) { border-bottom-color: var(--dt-accent3); }
+.slidev-layout thead tr th:nth-child(5n + 2) { border-bottom-color: var(--dt-accent6); }
+.slidev-layout thead tr th:nth-child(5n + 3) { border-bottom-color: var(--dt-accent4); }
+.slidev-layout thead tr th:nth-child(5n + 4) { border-bottom-color: var(--dt-accent1); }
+.slidev-layout thead tr th:nth-child(5n + 5) { border-bottom-color: var(--dt-accent5); }
+
+.slidev-layout tbody td {
+  padding: 0.7em 0.9em;
+  font-weight: 300;
+  color: var(--dt-navy);
+  border: 1px dashed rgba(0, 9, 47, 0.18);
+}
+
+.slidev-layout tbody tr:nth-child(odd) td {
+  background: rgba(0, 9, 47, 0.04);
+}
+
+.slidev-layout tbody tr:nth-child(even) td {
+  background: transparent;
+}
+
+.slidev-layout tbody tr:first-child td {
+  border-top: 3px solid var(--dt-accent3);
+}
+
+.slidev-layout tbody tr:first-child td:nth-child(5n + 1) { border-top-color: var(--dt-accent3); }
+.slidev-layout tbody tr:first-child td:nth-child(5n + 2) { border-top-color: var(--dt-accent6); }
+.slidev-layout tbody tr:first-child td:nth-child(5n + 3) { border-top-color: var(--dt-accent4); }
+.slidev-layout tbody tr:first-child td:nth-child(5n + 4) { border-top-color: var(--dt-accent1); }
+.slidev-layout tbody tr:first-child td:nth-child(5n + 5) { border-top-color: var(--dt-accent5); }
+
+.slidev-layout tfoot tr td {
+  padding: 0.7em 0.9em;
+  font-weight: 600;
+  color: var(--dt-navy);
+  border: 1px dashed rgba(0, 9, 47, 0.18);
+  border-top: 3px solid var(--dt-accent3);
+}
+
+/* Dark-mode table colors */
+.dark .slidev-layout thead tr th,
+.dark .slidev-layout tbody td,
+.dark .slidev-layout tfoot tr td {
+  color: var(--dt-white);
+}
+
+.dark .slidev-layout tbody td,
+.dark .slidev-layout tfoot tr td {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.dark .slidev-layout tbody tr:nth-child(odd) td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ── Blockquote ─────────────────────────────────────────────────────────── */
+.slidev-layout blockquote {
+  border-left: 4px solid var(--dt-accent3);
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* ── Callout utility classes ────────────────────────────────────────────── */
+.dt-callout {
+  border-left: 4px solid;
+  border-radius: 0 6px 6px 0;
+  padding: 0.75em 1em;
+  margin: 0.75em 0;
+}
+
+.dt-callout.info {
+  border-color: var(--dt-accent1);
+  background: rgba(24, 102, 254, 0.08);
+}
+
+.dt-callout.success {
+  border-color: var(--dt-accent3);
+  background: rgba(1, 211, 147, 0.08);
+}
+
+.dt-callout.warning {
+  border-color: var(--dt-warning);
+  background: rgba(253, 195, 0, 0.08);
+}
+
+.dt-callout.error {
+  border-color: var(--dt-error);
+  background: rgba(244, 61, 90, 0.08);
+}
+
+/* ── Badge utility classes ──────────────────────────────────────────────── */
+.dt-badge {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+.dt-badge.blue {
+  background: var(--dt-accent1);
+  color: var(--dt-white);
+}
+
+.dt-badge.teal {
+  background: var(--dt-accent3);
+  color: var(--dt-navy);
+}
+
+.dt-badge.purple {
+  background: var(--dt-accent2);
+  color: var(--dt-white);
+}
+
+.dt-badge.gray {
+  background: var(--dt-gray);
+  color: var(--dt-navy);
+}
+
+.dt-badge.cyan {
+  background: var(--dt-accent6);
+  color: var(--dt-navy);
+}
+
+.dt-badge.warning {
+  background: var(--dt-warning);
+  color: var(--dt-navy);
+}
+
+.dt-badge.error {
+  background: var(--dt-error);
+  color: var(--dt-white);
+}
+
+/* ── Chart / diagram sizing ──────────────────────────────────────────────── */
+/* Cap the host height. The SVG inside the shadow root respects max-height
+   via themeCSS in setup/mermaid.ts. preserveAspectRatio="xMidYMid meet" then
+   scales content to fit. */
+.slidev-layout .mermaid,
+.slidev-layout .dt-chart {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 340px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.slidev-layout.two-cols .mermaid,
+.slidev-layout.two-cols .dt-chart {
+  max-height: 300px;
+}
+
+.slidev-layout .dt-chart svg {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+/* Hide overflow on the slide content area so an oversized chart can never
+   cause a scrollbar. The SVG max-height will already constrain it, this is
+   just a safety net. */
+.slidev-layout.default .dt-default__content {
+  overflow: hidden;
+}
+
+/* ── Chart title utility ─────────────────────────────────────────────────── */
+.dt-chart-title {
+  display: inline-block;
+  font-family: 'DTFlow', sans-serif;
+  font-weight: 500;
+  font-size: 0.78em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dt-navy);
+  margin-bottom: 12px;
+  border-bottom: 3px solid var(--dt-accent3);
+  padding-bottom: 0.4em;
+}
+.dark .dt-chart-title { color: var(--dt-white); }
+
+/* ── Mermaid diagrams — Dynatrace styling ───────────────────────────────── */
+
+/* Transparent container so the slide background shows through */
+.slidev-layout .mermaid,
+.slidev-layout .mermaid svg {
+  background: transparent !important;
+}
+
+/* Apply DTFlow font throughout all diagram text */
+.slidev-layout .mermaid text,
+.slidev-layout .mermaid .label,
+.slidev-layout .mermaid .nodeLabel,
+.slidev-layout .mermaid .edgeLabel {
+  font-family: 'DTFlow', sans-serif !important;
+  font-weight: 300;
+}
+
+/* Node label text — medium weight for readability */
+.slidev-layout .mermaid .nodeLabel p,
+.slidev-layout .mermaid .cluster-label,
+.slidev-layout .mermaid .cluster-label span {
+  font-family: 'DTFlow', sans-serif !important;
+  font-weight: 500;
+}
+
+/* Edge label chips — white pill with navy text */
+.slidev-layout .mermaid .edgeLabel,
+.slidev-layout .mermaid .edgeLabel .label {
+  background-color: var(--dt-white) !important;
+  color: var(--dt-navy) !important;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 0.85em;
+}
+
+/* ─── Flowchart nodes: cycle PPT chart palette via nth-of-type ─────────── */
+.slidev-layout .mermaid g.node rect,
+.slidev-layout .mermaid g.node polygon,
+.slidev-layout .mermaid g.node circle,
+.slidev-layout .mermaid g.node ellipse,
+.slidev-layout .mermaid g.node > path {
+  stroke-width: 0 !important;
+  rx: 4px;
+  ry: 4px;
+}
+.slidev-layout .mermaid g.node:nth-of-type(6n + 1) > rect,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 1) > polygon,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 1) > circle,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 1) > ellipse,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 1) > path { fill: var(--dt-accent1) !important; }
+.slidev-layout .mermaid g.node:nth-of-type(6n + 2) > rect,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 2) > polygon,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 2) > circle,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 2) > ellipse,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 2) > path { fill: var(--dt-accent2) !important; }
+.slidev-layout .mermaid g.node:nth-of-type(6n + 3) > rect,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 3) > polygon,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 3) > circle,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 3) > ellipse,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 3) > path { fill: var(--dt-accent3) !important; }
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) > rect,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) > polygon,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) > circle,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) > ellipse,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) > path { fill: var(--dt-accent4) !important; }
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) > rect,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) > polygon,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) > circle,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) > ellipse,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) > path { fill: var(--dt-accent5) !important; }
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) > rect,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) > polygon,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) > circle,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) > ellipse,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) > path { fill: var(--dt-accent6) !important; }
+
+/* Light-fill nodes (accent4–6) need navy text for legibility */
+.slidev-layout .mermaid g.node text,
+.slidev-layout .mermaid g.node .nodeLabel { fill: var(--dt-white) !important; }
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) text,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 4) .nodeLabel,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) text,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 5) .nodeLabel,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) text,
+.slidev-layout .mermaid g.node:nth-of-type(6n + 6) .nodeLabel { fill: var(--dt-navy) !important; }
+
+/* Flowchart edges — bold accent1 lines (DT-themed, prominent) */
+.slidev-layout .mermaid .edgePath .path,
+.slidev-layout .mermaid .flowchart-link {
+  stroke: var(--dt-accent1) !important;
+  stroke-width: 2.5px !important;
+  fill: none !important;
+}
+.slidev-layout .mermaid marker path,
+.slidev-layout .mermaid .arrowMarkerPath {
+  fill: var(--dt-accent1) !important;
+  stroke: var(--dt-accent1) !important;
+}
+
+/* Cluster (subgraph) — DT-themed light tint, bold accent border, extra padding */
+.slidev-layout .mermaid .cluster rect {
+  fill: rgba(24, 102, 254, 0.05) !important;
+  stroke: var(--dt-accent1) !important;
+  stroke-width: 2px !important;
+  rx: 8px;
+  ry: 8px;
+}
+/* Mermaid renders cluster children with padding controlled by the SVG layout;
+   we boost visual breathing room with extra path expansion. */
+.slidev-layout .mermaid .cluster {
+  padding: 24px;
+}
+.slidev-layout .mermaid .cluster .cluster-label {
+  font-weight: 700 !important;
+  font-size: 0.95em !important;
+  fill: var(--dt-navy) !important;
+}
+
+/* ─── Sequence diagram ────────────────────────────────────────────────── */
+/* Lifelines — bold accent2 */
+.slidev-layout .mermaid line.actor-line {
+  stroke: var(--dt-accent2) !important;
+  stroke-width: 2px !important;
+  stroke-dasharray: 5 4 !important;
+}
+
+/* Message arrows — bold accent1 (DT-themed, not navy) */
+.slidev-layout .mermaid .messageLine0,
+.slidev-layout .mermaid .messageLine1 {
+  stroke: var(--dt-accent1) !important;
+  stroke-width: 2.5px !important;
+}
+.slidev-layout .mermaid #arrowhead path,
+.slidev-layout .mermaid .messageText {
+  fill: var(--dt-navy) !important;
+}
+.slidev-layout .mermaid #arrowhead path {
+  fill: var(--dt-accent1) !important;
+  stroke: var(--dt-accent1) !important;
+}
+
+/* Activation boxes — accent3 with no border */
+.slidev-layout .mermaid .activation0,
+.slidev-layout .mermaid .activation1,
+.slidev-layout .mermaid .activation2 {
+  fill: var(--dt-accent3) !important;
+  stroke: var(--dt-accent3) !important;
+}
+
+/* Note boxes — light yellow tint with warning border */
+.slidev-layout .mermaid .note,
+.slidev-layout .mermaid rect.note {
+  fill: rgba(253, 195, 0, 0.10) !important;
+  stroke: var(--dt-warning) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* ─── Pie chart — render as donut + PPT styling ───────────────────────── */
+.slidev-layout .mermaid .pieCircle {
+  stroke: var(--dt-white) !important;
+  stroke-width: 2px !important;
+}
+
+/* Hide per-slice percent labels — they overlap the donut hole anyway */
+.slidev-layout .mermaid .slice {
+  font-size: 0 !important;
+}
+
+.slidev-layout .mermaid .pieTitleText {
+  fill: var(--dt-navy) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+.slidev-layout .mermaid .legend text {
+  fill: var(--dt-navy) !important;
+  font-weight: 300 !important;
+  font-size: 12px !important;
+}
+
+/* ─── XY chart (mermaid xychart) — PPT chart axes ─────────────────────── */
+.slidev-layout .mermaid .xychart-line,
+.slidev-layout .mermaid .xychart-axis-line,
+.slidev-layout .mermaid .xychart-grid line {
+  stroke: var(--dt-gray) !important;
+}
+.slidev-layout .mermaid .xychart-axis-label,
+.slidev-layout .mermaid .xychart-tick text {
+  fill: var(--dt-navy) !important;
+  font-family: 'DTFlow', sans-serif !important;
+}
+
+/* Gantt today-line */
+.slidev-layout .mermaid .today {
+  stroke: var(--dt-accent3) !important;
+  stroke-width: 2px !important;
+}
+
+/* Make diagram SVGs scale nicely within slides */
+.slidev-layout .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
