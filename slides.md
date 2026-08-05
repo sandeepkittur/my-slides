@@ -1,28 +1,18 @@
 ---
 theme: ./theme
-title: August UX Updates
+title: September UX Updates
 ---
 
-# August UX Updates
-Monthly product highlights · August 2026
-
----
-
-# Research Analysis Stages Revamp
-
-- Redesigned stage progression for clearer user flow
-- Improved visibility into analysis status at each step
-- Reduced friction when moving between stages
-- Visual hierarchy updated for faster scanning
+# September UX Updates
+Monthly product highlights · September 2026
 
 ---
 
-# Advanced Processing
 
-- New processing controls available in the settings panel
-- Batch operations now supported across multiple items
-- Performance improvements reduce processing time
-- Error handling updated with clearer feedback messages
+# OP Papercuts
+
+- New documentation links A11y-proof
+- Color contrast
 
 ---
 
@@ -35,9 +25,6 @@ Monthly product highlights · August 2026
 
 ---
 
-layout: center
-class: text-center
----
 
 # Thank You
 
