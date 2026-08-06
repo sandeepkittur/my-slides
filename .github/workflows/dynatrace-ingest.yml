@@ -34,15 +34,20 @@ jobs:
 
   ingest-workflow-result:
     # Runs when another workflow completes — captures the actual pass/fail
+  ingest-workflow-result:
     if: github.event_name == 'workflow_run'
     runs-on: ubuntu-latest
     steps:
       - name: Send workflow result to Dynatrace
+        env:
+          DT_URL: ${{ secrets.DT_ENV_URL }}
+          DT_TOKEN: ${{ secrets.DT_API_TOKEN }}
         run: |
-          curl -s -o /dev/null -w "%{http_code}" -X POST \
-            "${{ secrets.DT_ENV_URL }}/platform/ingest/v1/events/custom/github.cicd" \
+          echo "Posting to: ${DT_URL}/platform/ingest/v1/events/custom/github.cicd"
+          curl -sL -o /dev/null -w "%{http_code}" -X POST \
+            "${DT_URL}/platform/ingest/v1/events/custom/github.cicd" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Api-Token ${{ secrets.DT_API_TOKEN }}" \
+            -H "Authorization: Api-Token ${DT_TOKEN}" \
             -d '[{
               "event.type":   "workflow_run",
               "event.status": "${{ github.event.workflow_run.conclusion }}",
@@ -50,6 +55,5 @@ jobs:
               "branch":       "${{ github.event.workflow_run.head_branch }}",
               "repository":   "${{ github.repository }}",
               "actor":        "${{ github.event.workflow_run.triggering_actor.login }}",
-              "run_id":       "${{ github.event.workflow_run.id }}",
-              "run_url":      "${{ github.event.workflow_run.html_url }}"
+              "run_id":       "${{ github.event.workflow_run.id }}"
             }]'
