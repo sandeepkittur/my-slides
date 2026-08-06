@@ -6,34 +6,26 @@ on:
   pull_request:
     types: [opened, closed, reopened]
   workflow_run:
-    workflows: ["*"]       # watches ALL other workflows
+    workflows: ["*"]
     types: [completed]
 
 jobs:
   ingest-push-or-pr:
-    # Runs on push and pull_request events
     if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
     steps:
       - name: Send event to Dynatrace
+        env:
+          DT_URL: ${{ secrets.DT_ENV_URL }}
+          DT_TOKEN: ${{ secrets.DT_API_TOKEN }}
         run: |
-          curl -s -o /dev/null -w "%{http_code}" -X POST \
-            "${{ secrets.DT_ENV_URL }}/platform/ingest/v1/events/custom/github.cicd" \
+          echo "Posting to: ${DT_URL}/platform/ingest/v1/events/custom/github.cicd"
+          curl -sL -o /dev/null -w "%{http_code}" -X POST \
+            "${DT_URL}/platform/ingest/v1/events/custom/github.cicd" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Api-Token ${{ secrets.DT_API_TOKEN }}" \
-            -d '[{
-              "event.type":   "${{ github.event_name }}",
-              "event.status": "success",
-              "repository":   "${{ github.repository }}",
-              "branch":       "${{ github.ref_name }}",
-              "actor":        "${{ github.actor }}",
-              "commit":       "${{ github.sha }}",
-              "workflow":     "${{ github.workflow }}",
-              "run_id":       "${{ github.run_id }}"
-            }]'
+            -H "Authorization: Api-Token ${DT_TOKEN}" \
+            -d '[{"event.type":"${{ github.event_name }}","event.status":"success","repository":"${{ github.repository }}","branch":"${{ github.ref_name }}","actor":"${{ github.actor }}","commit":"${{ github.sha }}"}]'
 
-  ingest-workflow-result:
-    # Runs when another workflow completes — captures the actual pass/fail
   ingest-workflow-result:
     if: github.event_name == 'workflow_run'
     runs-on: ubuntu-latest
@@ -48,12 +40,4 @@ jobs:
             "${DT_URL}/platform/ingest/v1/events/custom/github.cicd" \
             -H "Content-Type: application/json" \
             -H "Authorization: Api-Token ${DT_TOKEN}" \
-            -d '[{
-              "event.type":   "workflow_run",
-              "event.status": "${{ github.event.workflow_run.conclusion }}",
-              "workflow":     "${{ github.event.workflow_run.name }}",
-              "branch":       "${{ github.event.workflow_run.head_branch }}",
-              "repository":   "${{ github.repository }}",
-              "actor":        "${{ github.event.workflow_run.triggering_actor.login }}",
-              "run_id":       "${{ github.event.workflow_run.id }}"
-            }]'
+            -d '[{"event.type":"workflow_run","event.status":"${{ github.event.workflow_run.conclusion }}","workflow":"${{ github.event.workflow_run.name }}","branch":"${{ github.event.workflow_run.head_branch }}","repository":"${{ github.repository }}","actor":"${{ github.event.workflow_run.triggering_actor.login }}"}]'
