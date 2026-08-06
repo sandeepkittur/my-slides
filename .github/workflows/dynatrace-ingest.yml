@@ -23,7 +23,7 @@ jobs:
           curl -sL -o /dev/null -w "%{http_code}" -X POST \
             "${DT_URL}/platform/ingest/custom/events/github.cicd" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Api-Token ${DT_TOKEN}" \
+            -H "Authorization: Bearer ${DT_TOKEN}" \
             -d '[{"event.type":"${{ github.event_name }}","event.status":"success","repository":"${{ github.repository }}","branch":"${{ github.ref_name }}","actor":"${{ github.actor }}","commit":"${{ github.sha }}"}]'
 
   ingest-workflow-result:
@@ -39,5 +39,5 @@ jobs:
           curl -sL -o /dev/null -w "%{http_code}" -X POST \
             "${DT_URL}/platform/ingest/custom/events/github.cicd" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Api-Token ${DT_TOKEN}" \
+            -H "Authorization: Bearer ${DT_TOKEN}" \
             -d '[{"event.type":"workflow_run","event.status":"${{ github.event.workflow_run.conclusion }}","workflow":"${{ github.event.workflow_run.name }}","branch":"${{ github.event.workflow_run.head_branch }}","repository":"${{ github.repository }}","actor":"${{ github.event.workflow_run.triggering_actor.login }}"}]'
