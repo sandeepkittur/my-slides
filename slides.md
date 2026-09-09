@@ -9,8 +9,9 @@ Monthly product highlights · September 2026
 ---
 
 
-# PPX-14187:  Storage management widgets fail for QUERY_NOT_FOUND exceptions
+# QUERY_NOT_FOUND exceptions
 
+- PPX-14187: Storage management widgets fail for QUERY_NOT_FOUND exceptions
 - For the QUERY_GONE or QUERY_NOT_FOUND error in Grail files UseFiles.ts
 - The current message was a technical jargon
 - Overflow of information
