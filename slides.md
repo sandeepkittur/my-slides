@@ -14,8 +14,10 @@ Monthly product highlights · September 2026
 - For the QUERY_GONE or QUERY_NOT_FOUND error in Grail files UseFiles.ts
 - The current message was a technical jargon
 - Overflow of information
-- ![Before](/unknown.png)
-- ![After](/unknown-2.png)
+<div class="grid grid-cols-2 gap-4">
+  <img src="/my-slides/unknown.png" />
+  <img src="/my-slides/unknown-2.png" />
+</div>
 
 ---
 
