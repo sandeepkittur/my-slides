@@ -16,8 +16,8 @@ Monthly product highlights · September 2026
 - The current message was a technical jargon
 - Overflow of information
 <div class="grid grid-cols-2 gap-4">
-  <img src="/my-slides/unknown.png" />
-  <img src="/my-slides/unknown-2.png" />
+  <img src="./unknown.png" />
+  <img src="./unknown-2.png" />
 </div>
 
 ---
