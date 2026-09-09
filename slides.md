@@ -8,6 +8,15 @@ Monthly product highlights · September 2026
 
 ---
 
+# VIs in motion
+
+- End-to-End record preview
+- Advanced processing
+- Hidden stages
+- A couple of paper cuts
+
+---
+
 
 # QUERY_NOT_FOUND exceptions
 
