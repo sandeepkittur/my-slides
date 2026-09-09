@@ -1,19 +1,27 @@
 ---
 theme: ./theme
-title: August UX Updates
+title: September UX Updates
 ---
 
-# August UX Updates
-Monthly product highlights · August 2026
+# September UX Updates
+Monthly product highlights · September 2026
 
 ---
 
+
+# PPX-14187:  Storage management widgets fail for QUERY_NOT_FOUND exceptions
+
+- For the QUERY_GONE or QUERY_NOT_FOUND error in Grail files UseFiles.ts
+- The current message was a technical jargon
+- Overflow of information
+
+---
 
 # E2E Record Preview
 
-- End-to-end record preview mode for pipeline builder
-- Simulates full user journey from Ingest Source to Pipeline and beyond
-- Instant feedback loop for faster iteration
+- Breaking down the VI
+- Processor preview for the pipeline - cascading flow of how data is being modified
+- Pipeline preview - how the record is being modified across stages/ processors
 
 ---
 
