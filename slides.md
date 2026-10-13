@@ -1,50 +1,110 @@
 ---
 theme: ./theme
-title: September UX Updates
+title: October UX Updates
 ---
 
-# September UX Updates
-Monthly product highlights · September 2026
-
----
-
-# VIs in motion
-
-- End-to-End record preview
-- Advanced processing
-- Hidden stages
-- A couple of paper cuts
+# October UX Updates
+Monthly product highlights · October 2026
 
 ---
 
 
-# VIs in motion
+# OpP App Maintenance: Post-GA Improvements
 
-- End-to-End record preview
-- Advanced processing
-- Hidden stages
-- A couple of paper cuts
+- Topic: Surface the object `version` in the pipeline details JSON
+- As a user, I want to see the object version in the pipeline details JSON so the current state of the pipeline is fully represented
+- The OpenPipeline App now talks to the Settings API via the new SDK, which requires an object version on every update for optimistic locking
+- This version field isn't currently surfaced in the pipeline details JSON view, so the JSON representation is incomplete
+
+<img src="/pipeline-version-field.png" class="rounded" />
 
 ---
 
-# QUERY_NOT_FOUND exceptions
+# Locked vs. Editable Fields
 
-- PPX-14187: Storage management widgets fail for QUERY_NOT_FOUND exceptions
-- For the QUERY_GONE or QUERY_NOT_FOUND error in Grail files UseFiles.ts
-- The current message was a technical jargon
-- Overflow of information
+- Idea: show a locked state in the JSON view to make the distinction clear
+- Clear visual separation between editable and non-editable (system-managed) fields
+- Reduces confusion when `version`, `schemaId`, `objectId` and similar fields appear read-only
+
+<img src="/pipeline-locked-fields.png" class="rounded" />
+
+- Strato idea ticket raised: [PPFB-831](https://dt-rnd.atlassian.net/browse/PPFB-831)
+
+---
+
+# Introducing New EmptyStates
+
+- Log ingest configuration isn't available yet
+- This feature requires Logs powered by Grail
+- This feature isn't available for your environment
+- &lt;This feature&gt; isn't available yet
+
 <div class="grid grid-cols-2 gap-4">
-  <img src="./Unknown.png" />
-  <img src="./Unknown-2.png" />
+  <img src="/empty-state-log-ingest.png" class="rounded" />
+  <img src="/empty-state-feature-requires-grail.png" class="rounded" />
+  <img src="/empty-state-not-available-environment.png" class="rounded" />
+  <img src="/empty-state-feature-rolling-out.png" class="rounded" />
 </div>
 
 ---
 
-# E2E Record Preview
+# Introducing New EmptyStates (cont.)
 
-- Breaking down the VI
-- Processor preview for the pipeline - cascading flow of how data is being modified
-- Pipeline preview - how the record is being modified across stages/ processors
+- Span export isn't turned on
+- Your subscription doesn't include &lt;this feature&gt;
+- Smartscape lifecycle events are not enabled
+
+<div class="grid grid-cols-2 gap-4">
+  <img src="/empty-state-span-export.png" class="rounded" />
+  <img src="/empty-state-subscription-upgrade.png" class="rounded" />
+  <img src="/empty-state-smartscape-lifecycle.png" class="rounded" />
+</div>
+
+---
+
+# E2E: Pipeline Preview
+
+- Two cases: pipeline-focused preview (preview all processors of the pipeline), and preview of ingest preprocessing + pipeline processors
+- Status: design iterations in progress — tested with a couple of internal experts, refining the use case
+
+<img src="/e2e-pipeline-preview-overview.png" class="rounded" />
+
+---
+
+# E2E: Pipeline Preview — Flow
+
+- Pick a scope
+- Start with sample data
+- Auto-run preview to start seeing processor output
+
+<div class="grid grid-cols-3 gap-4">
+  <img src="/e2e-preview-scope.png" class="rounded" />
+  <img src="/e2e-preview-sample-data.png" class="rounded" />
+  <img src="/e2e-preview-autorun.png" class="rounded" />
+</div>
+
+---
+
+# Focus on MDP
+
+- Reducing clutter to minimalise the offering
+- Scale the preview experience as we go
+
+<div class="grid grid-cols-3 gap-4">
+  <img src="/e2e-preview-mdp-select.png" class="rounded" />
+  <img src="/e2e-preview-mdp-in.png" class="rounded" />
+  <img src="/e2e-preview-mdp-out.png" class="rounded" />
+</div>
+
+---
+
+# Starting the Conversation Around Hidden Stages
+
+- System stages (Limiting, Maintenance window, Sanitization) act on records but are hidden from the visible pipeline stages
+- Example: Size limits trimmed an oversized record from 582 KB to 512 KB and stamped a warning flag instead of dropping it — but this wasn't visible without digging in
+- Exploring how to surface these system-stage effects so users aren't surprised by them
+
+<img src="/hidden-stages-size-limits.png" class="rounded" />
 
 ---
 
