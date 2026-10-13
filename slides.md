@@ -108,6 +108,15 @@ Monthly product highlights · October 2026
 
 ---
 
+# Fleet Management & BindPlane Integration
+
+- Met with Vicky to discuss the user flow
+- Not yet prioritised by the Fleet management team — waiting to be picked up
+
+<img src="/fleet-bindplane-egress.png" class="rounded" />
+
+---
+
 
 # Thank You
 
