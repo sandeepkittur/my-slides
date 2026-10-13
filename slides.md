@@ -16,6 +16,13 @@ Monthly product highlights · October 2026
 - The OpenPipeline App now talks to the Settings API via the new SDK, which requires an object version on every update for optimistic locking
 - This version field isn't currently surfaced in the pipeline details JSON view, so the JSON representation is incomplete
 
+---
+
+# OpP App Maintenance: Post-GA Improvements (cont.)
+
+- The `version` field now needed for optimistic locking is missing from the JSON view
+- Adding it keeps the pipeline details JSON complete and in sync with what the Settings API actually tracks
+
 <img src="/pipeline-version-field.png" class="rounded" />
 
 ---
